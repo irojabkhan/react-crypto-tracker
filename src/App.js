@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Coins from './Components/Coins';
 
+import image from './404.gif';
 import './App.css';
 
 function App() {
@@ -34,22 +35,29 @@ function App() {
 			</form>
 			<div className="container">
 				<div className="row">
-				{
+				{filteredCoin.length > 0 ? (
 					filteredCoin.map(coin => {
 						return (
-							<Coins 
-								key={coin.id}
-								name={coin.name}
-								price={coin.current_price}
-								symbol={coin.symbol}
-								marketCap={coin.total_volume}
-								volume={coin.market_cap}
-								image={coin.image}
-								priceChange={coin.price_change_percentage_24h}
-							/>
+							<div>
+								<Coins 
+									key={coin.id}
+									name={coin.name}
+									price={coin.current_price}
+									symbol={coin.symbol}
+									marketCap={coin.total_volume}
+									volume={coin.market_cap}
+									image={coin.image}
+									priceChange={coin.price_change_percentage_24h}
+								/>
+							</div>
 						)
 					})
-				}
+				) : (
+					<div className='text-center'>
+						<img src={image} height={200} alt="not found" />
+						<h2>No Coin Found</h2>
+					</div>
+				)}
 				</div>
 			</div>
 		</div>
